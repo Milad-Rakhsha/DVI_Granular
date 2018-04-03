@@ -1,1 +1,2 @@
 # DVI_Granular
+DVI_Granular is a repository to prototype granular material simulations in Differential Variational Equality (DVI) framework. The solution of the contact forces are posed as a quadratic optimization problem with unilateral constraints that results from the contact between grains. The Newton-Euler equations are integrated in time via a semi-implicit method.
