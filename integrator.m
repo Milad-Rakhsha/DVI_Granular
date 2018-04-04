@@ -19,7 +19,9 @@ A=-eye(nc,nc);
 b=zeros(nc,1);
 options = optimoptions('quadprog','Algorithm','interior-point-convex',...
     'Display','off');
-f = quadprog(N,p,A,b,[],[],[],[],[],options);
+% f = quadprog(N,p,A,b,[],[],[],[],[],options);
+f = IPM(N,p,params);
+
 F_contact=B*f;
 end
 

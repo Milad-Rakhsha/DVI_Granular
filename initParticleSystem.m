@@ -17,7 +17,7 @@ counter = 1;
 % Place Particles
 for iy = 0: numParticlesPerCol-1
     for ix = 0:numParticlesPerRow-1 
-        Pos(counter) = ix*dr+ dr/2+5*dr;
+        Pos(counter) = ix*dr+ dr/2+4*dr;
         Pos(counter+1) = iy*dr*1.2+ dr/2 ;
         counter = counter + 2; 
     end

@@ -15,7 +15,7 @@ for i = 1:nb
     Normals=[
         0,-1,0,1;
         -1,0,1,0];
-    wall_c=dist_wall<=params.diam/2;
+    wall_c=dist_wall<params.diam;
     for i_wall=1:4
         if(wall_c(i_wall)==1)
 %             fprintf('dist(%d,wall %d)=%1.4f \n',i,i_wall,dist_wall(i_wall)-params.diam/2);
@@ -24,7 +24,7 @@ for i = 1:nb
             Dc(2*(nb+i_wall)-1:2*(nb+i_wall),:)=-Normals(:,i_wall);
             Jacobian=[Jacobian Dc];
             contact_pairs=[contact_pairs; [i nb+i_wall]];
-            phi=[phi;dist_wall(i_wall)-params.diam/2];
+            phi=[phi;(dist_wall(i_wall)-params.diam)];
             nc=nc+1;
         end
     end
@@ -34,7 +34,7 @@ for i = 1:nb
     for neighborIterate = 2:m
         j = NL(neighborIterate);
         dist=sqrt((Pos(2*j-1)-Pos(2*i-1))^2+(Pos(2*j)-Pos(2*i))^2);
-        if(dist<=params.diam && (sum(contact_pairs(:,1)==j & contact_pairs(:,2)==i)==0))
+        if(dist<params.diam && (sum(contact_pairs(:,1)==j & contact_pairs(:,2)==i)==0))
 %             fprintf('dist(%d,%d)=%.4f\n',i,j,dist-params.diam);
             Dc=zeros(2*(nb+4),1); % Jacobian submatrix
             dx=[Pos(2*j-1)-Pos(2*i-1);
@@ -46,7 +46,7 @@ for i = 1:nb
             Dc(2*j-1:2*j,:)=n;%[n v];
             Jacobian=[Jacobian Dc];
             contact_pairs=[contact_pairs; [i j]];
-            phi=[phi;n'*dx-params.diam];
+            phi=[phi;(n'*dx-params.diam)];
             nc=nc+1;
         end
     end
